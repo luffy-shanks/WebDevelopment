@@ -31,3 +31,21 @@ function toggleUser() {
     name.textContent = currentUser.name;
     sex.textContent = currentUser.gender;
 }
+function randomUser() {
+    fetch('https://randomuser.me/api/')
+        .then(response => response.json())
+        .then(data => {
+            const user = data.results[0];
+            const image = document.querySelector(".card img");
+            const name = document.querySelector(".card h2");
+            const gender = document.querySelector(".card p");
+
+            image.src = user.picture.large;
+            image.alt = `${user.name.first} ${user.name.last}`;
+            name.textContent = `${user.name.first} ${user.name.last}`;
+            gender.textContent = user.gender;
+        })
+        .catch(error => {
+            console.log("Something went wrong:", error);
+        });
+}
